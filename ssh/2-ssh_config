@@ -1,2 +1,4 @@
-#!/usr/bin/env bash
-#COMMENT
+# Configuring ssh client.
+Host 44.201.250.187
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
