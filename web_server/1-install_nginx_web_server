@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# Installing nginx
-sudo apt update && upgrade
-sudo apt install nginx -y 
-echo "Holberton School" | sudo tee /var/www/html/index.html
-sudo service nginx start
+
+apt-get update -y
+apt-get install nginx -y
+
+echo 'Holberton School for the win!' > /var/www/html/index.html
+
+service nginx restart
+
+update-rc.d nginx defaults
