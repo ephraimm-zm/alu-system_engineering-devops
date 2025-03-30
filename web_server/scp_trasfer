@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Define server details
+USER="ubuntu@54.145.159.241"
+KEY_PATH="$HOME/.ssh/id_rsa"
+
+# Prompt for the target file on the client
+read -p "Enter the file to transfer: " LOCAL_FILE
+
+# Ensure the file exists
+if [ ! -f "$LOCAL_FILE" ]; then
+    echo "Error: File '$LOCAL_FILE' not found."
+    exit 1
+fi
+
+# Prompt for the target location on the server (default: home directory)
+read -p "Enter the target location on the server (press Enter for home): " REMOTE_PATH
+REMOTE_PATH=${REMOTE_PATH:-~/}
+
+# Execute SCP command
+scp -i "$KEY_PATH" "$LOCAL_FILE" "$USER:$REMOTE_PATH"
+
+# Confirm success
+if [ $? -eq 0 ]; then
+    echo "File successfully transferred to $USER:$REMOTE_PATH"
+else
+    echo "Error: File transfer failed."
+fi
+
