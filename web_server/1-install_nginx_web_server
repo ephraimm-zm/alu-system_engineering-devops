@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
-#Script to install nginx on web server
-apt-get update -y
-apt-get install nginx -y
+#code that installs ngix web server
 
-mkdir /var/www/html
-touch /var/www/html/index.html
+# Update the package list to ensure the latest versions of packages are available
+sudo apt-get update -y
 
-echo 'Holberton School' > /var/www/html/index.html
+# Install Nginx
+sudo apt-get install nginx -y
 
-service nginx restart
+# Configure Nginx to listen on port 80
+sudo sed -i 's/\(listen 80;\)/\1 default_server;/' /etc/nginx/sites-available/default
 
-update-rc.d nginx defaults
+# Create a test HTML file with the required string
+echo "Holberton School for the win!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Restart Nginx without using systemctl
+sudo service nginx stop
+sudo nginx
+
+# Verify that Nginx returns the expected page with the string "Holberton School"
+curl localhost
