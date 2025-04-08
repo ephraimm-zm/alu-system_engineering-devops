@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# nginx as nginx user
 # nginx must be listening on all active IPs on port 8080
 pkill -f apache2
 chmod 644 /etc/nginx/nginx.conf
